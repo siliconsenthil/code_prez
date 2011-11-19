@@ -1,5 +1,5 @@
 require 'RedCloth'
-file_to_parse = './sample'
+file_to_parse = './sample_input.html'
 output_file = './sample_output.html'
 file_contents = File.read(file_to_parse)
 file_contents.gsub!(/code:(.*)$/) do |match|
