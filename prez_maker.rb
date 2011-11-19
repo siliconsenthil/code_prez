@@ -6,5 +6,5 @@ file_contents.gsub!(/code:(.*)$/) do |match|
   "<pre class='brush: ruby;gutter: false;'>#{File.read($1.strip)}</pre>"
 end
 template_file_contents = File.read('./template.html')
-final_html = template_file_contents.gsub(/<body>.*<\/body>/m, RedCloth.new(file_contents).to_html)
+final_html = template_file_contents.gsub(/<body>.*<\/body>/m, "<body>\n#{RedCloth.new(file_contents).to_html}\n</body>")
 File.open(output_file,'w') {|f| f.write final_html}
