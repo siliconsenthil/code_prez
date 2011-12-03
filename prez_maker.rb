@@ -1,3 +1,4 @@
+require 'erb'
 require 'RedCloth'
 
 def get_snippet(location)
@@ -11,6 +12,10 @@ file_contents = File.read(file_to_parse)
 file_contents.gsub!(/code:(.*)$/) do |match|
   "<pre class='brush: ruby;gutter: false;'>#{get_snippet($1.strip)}</pre>"
 end
-template_file_contents = File.read('./template.html')
-final_html = template_file_contents.gsub(/<body>.*<\/body>/m, "<body>\n#{RedCloth.new(file_contents).to_html}\n</body>")
+p file_contents
+p '*'*100
+slides = file_contents.split(/^>>>>>>>>>.*\n/).collect{|raw_slide| RedCloth.new(raw_slide).to_html}
+p slides.size
+slides.each{|s| p s}
+final_html = ERB.new(File.read('./template.html.erb')).result(binding)
 File.open(output_file,'w') {|f| f.write final_html}

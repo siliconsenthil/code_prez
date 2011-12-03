@@ -5,11 +5,11 @@ class SomeClass
   def some_method
   end
 
-  #--SAMPLE--
+  #--sample--
   def new_method
     if(true)
       #do nothing
     end
   end
-  #--SAMPLE--
+  #--sample--
 end
